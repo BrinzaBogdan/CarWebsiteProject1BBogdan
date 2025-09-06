@@ -7,7 +7,7 @@ import { SearchManufacturer } from "./";
 const SearchBar= () => {
     const [manufacturer, setManufacturer] = useState('');
 
-    
+
     const handleSearch = () => {}
 
 
@@ -17,6 +17,8 @@ const SearchBar= () => {
     {handleSearch}> 
     <div className="searchbar__item">
         <SearchManufacturer
+        manufacturer={manufacturer}
+        setManufacturer={setManufacturer}
 
 
 
