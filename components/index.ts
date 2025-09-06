@@ -7,6 +7,7 @@ import CustomFilter from './CustomFilter';
 import SearchManufacturer from './SearchManufacturer';
 import CarCard from './CarCard';
 import CarDetails from './CarDetails';
+import { generateCarImageUrl } from '@/utils';
 
 
 
@@ -20,5 +21,6 @@ export {
   SearchManufacturer,
   CarCard,
   CarDetails,
+  generateCarImageUrl,
 }
 
