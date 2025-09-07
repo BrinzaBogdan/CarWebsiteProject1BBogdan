@@ -1,4 +1,4 @@
-"use client";
+
 import {
   CarCard,
   CustomFilter,
@@ -9,11 +9,10 @@ import {
 } from "@/components";
 import { fetchCars } from "@/utils";
 import { fuels, yearsOfProduction } from "@/constants";
-import Image from "next/image";
 import { HomeProps } from "@/types";
 
 export default async function Home({ searchParams }: HomeProps) {
-  const params = await searchParams;
+  const params = searchParams;
   const allCars = await fetchCars({
     manufacturer: params.manufacturer || "",
     year: Number(params.year) || 2022,
@@ -27,7 +26,6 @@ export default async function Home({ searchParams }: HomeProps) {
   return (
     <main className="overflow-hidden">
       <Hero />
-
       <div className="mt-12 padding-x padding-y max-width" id="discover">
         <div className="home__text-container">
           <h1 className="text-4xl font-extrabold">Car Catalog</h1>
@@ -36,7 +34,6 @@ export default async function Home({ searchParams }: HomeProps) {
 
         <div className="home__filters">
           <SearchBar />
-
           <div className="home__filter-container">
             <CustomFilter title="fuel" options={fuels} />
             <CustomFilter title="year" options={yearsOfProduction} />
@@ -47,7 +44,7 @@ export default async function Home({ searchParams }: HomeProps) {
           <section>
             <div className="home__cars-wrapper">
               {allCars?.map((car) => (
-                <CarCard car={car} />
+                <CarCard car={car} key={car.id} />
               ))}
             </div>
 
