@@ -29,14 +29,14 @@ export const deleteSearchParams = (type: string) => {
   return newPathname;
 };
 
-// ✅ Cache global pentru rezultate API
+
 const fetchCache: { [key: string]: Promise<any> } = {};
 
 export async function fetchCars(filters: FilterProps) {
   const { manufacturer, year, model, limit, fuel } = filters;
   const cacheKey = `${manufacturer}-${year}-${model}-${limit}-${fuel}`;
 
-  // Dacă avem deja o promisiune în cache, returnăm aceea (previne multiple fetch-uri simultane)
+
   if (fetchCache[cacheKey]) {
     return fetchCache[cacheKey];
   }
@@ -46,13 +46,9 @@ export async function fetchCars(filters: FilterProps) {
     "X-RapidAPI-Host": "cars-by-api-ninjas.p.rapidapi.com",
   };
 
-  // Salvăm promisiunea în cache chiar înainte de fetch
+  
   const fetchPromise = fetch(
-<<<<<<< HEAD
-    `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=m8`,
-=======
-    `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=corolla`,
->>>>>>> 730a7b11979c1e85dc50503e13ee0b298f4c5553
+    `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=bmw&model=840i`,
     { headers }
   )
     .then((res) => res.json())
