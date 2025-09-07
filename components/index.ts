@@ -8,6 +8,7 @@ import SearchManufacturer from './SearchManufacturer';
 import CarCard from './CarCard';
 import CarDetails from './CarDetails';
 import { generateCarImageUrl } from '@/utils';
+import { ShowMore } from './ShowMore'
 
 
 
