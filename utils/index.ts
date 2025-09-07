@@ -48,7 +48,11 @@ export async function fetchCars(filters: FilterProps) {
 
   // Salvăm promisiunea în cache chiar înainte de fetch
   const fetchPromise = fetch(
+<<<<<<< HEAD
     `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=m8`,
+=======
+    `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=corolla`,
+>>>>>>> 730a7b11979c1e85dc50503e13ee0b298f4c5553
     { headers }
   )
     .then((res) => res.json())
