@@ -1,15 +1,24 @@
-import { CarCard, CustomFilter, Hero, SearchBar /*, ShowMore */ } from "@/components";
-import { fuels, yearsOfProduction } from "@/constants";
-import { fetchCars } from "@/utils";
-import Image from "next/image";
 
-export default async function Home({ searchParams }) {
+import {
+  CarCard,
+  CustomFilter,
+  Hero,
+  SearchBar,
+  ShowMore,
+  TestFilter,
+} from "@/components";
+import { fetchCars } from "@/utils";
+import { fuels, yearsOfProduction } from "@/constants";
+import { HomeProps } from "@/types";
+
+export default async function Home({ searchParams }: HomeProps) {
+  const params = searchParams;
   const allCars = await fetchCars({
-    manufacturer: searchParams.manufacturer || "",
-    year: searchParams.year || 2022,
-    fuel: searchParams.fuel || "",
-    limit: searchParams.limit || 10,
-    model: searchParams.model || "",
+    manufacturer: params.manufacturer || "",
+    year: Number(params.year) || 2022,
+    fuel: params.fuel || "",
+    limit: Number(params.limit) || 10,
+    model: params.model || "",
   });
 
   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
@@ -17,16 +26,14 @@ export default async function Home({ searchParams }) {
   return (
     <main className="overflow-hidden">
       <Hero />
-
       <div className="mt-12 padding-x padding-y max-width" id="discover">
         <div className="home__text-container">
-          <h1 className="text-4xl font-extrabold">Car catalogue</h1>
+          <h1 className="text-4xl font-extrabold">Car Catalog</h1>
           <p>Explore the cars you might like</p>
         </div>
 
         <div className="home__filters">
           <SearchBar />
-
           <div className="home__filter-container">
             <CustomFilter title="fuel" options={fuels} />
             <CustomFilter title="year" options={yearsOfProduction} />
@@ -36,18 +43,15 @@ export default async function Home({ searchParams }) {
         {!isDataEmpty ? (
           <section>
             <div className="home__cars-wrapper">
-              {allCars?.map((car, idx) => (
-                <CarCard key={idx} car={car} />
+              {allCars?.map((car) => (
+                <CarCard car={car} key={car.id} />
               ))}
             </div>
 
-            {/*
-              Uncomment this when ShowMore is ready:
-              <ShowMore
-                pageNumber={(searchParams.limit || 10) / 10}
-                isNext={(searchParams.limit || 10) < allCars.length}
-              />
-            */}
+            <ShowMore
+              pageNumber={(Number(searchParams.limit) || 10) / 10}
+              isNext={(Number(searchParams.limit) || 10) > allCars.length}
+            />
           </section>
         ) : (
           <div className="home__error-container">

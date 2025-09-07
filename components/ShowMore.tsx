@@ -1,30 +1,34 @@
 "use client";
 
-import { ShowMoreProps } from "@/types";
 import { useRouter } from "next/navigation";
-import CustomButton from "./CustomButton";
+
+import { ShowMoreProps } from "@/types";
 import { updateSearchParams } from "@/utils";
+import CustomButton from "./CustomButton";
 
 const ShowMore = ({ pageNumber, isNext }: ShowMoreProps) => {
   const router = useRouter();
 
   const handleNavigation = () => {
+    // Calculate the new limit based on the page number and navigation type
     const newLimit = (pageNumber + 1) * 10;
-    const newPathName = updateSearchParams("limit", `${newLimit}`);
 
-    router.push(newPathName);
+    // Update the "limit" search parameter in the URL with the new value
+    const newPathname = updateSearchParams("limit", `${newLimit}`);
+
+    router.push(newPathname);
   };
-
-  if (!isNext) return null; 
 
   return (
     <div className="w-full flex-center gap-5 mt-10">
-      <CustomButton
-        title="Show More"
-        btnType="button"
-        containerStyles="bg-primary-blue rounded-full text-white"
-        handleClick={handleNavigation}
-      />
+      {!isNext && (
+        <CustomButton
+          btnType="button"
+          title="Show More"
+          containerStyles="bg-primary-blue rounded-full text-white"
+          handleClick={handleNavigation}
+        />
+      )}
     </div>
   );
 };

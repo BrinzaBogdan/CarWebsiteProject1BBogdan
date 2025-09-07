@@ -382,3 +382,26 @@
   margin: 24px auto;
   padding: 24px;
 }
+
+.spacer {
+  width: 20%; /* cât de lat vrei (poate fi și 50% sau 200px) */
+  margin-top: 2%; /* cât de înalt vrei spațiul */
+}
+
+.footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem; /* spațiu între coloane */
+}
+
+.footer__link {
+  min-width: 150px; /* să nu fie prea înguste coloanele */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footer__copyrights-link {
+  display: flex;
+  gap: 2rem; /* spațiu între linkuri */
+}
